@@ -11,6 +11,10 @@ const dotEnv = require('dotenv');
 const passport = require('passport');
 app.use(passport.initialize());
 
+// ENV variables
+dotEnv.config();
+
+console.log("process.env", process.env.JWT_KEY);
 // session config
 const sessionOptions = {
 	name: 'session',
@@ -24,20 +28,18 @@ const sessionOptions = {
 	}
 };
 
-// ENV variables
-dotEnv.config();
 
 // routes require
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const apisRouter = require('./routes/apis');
-const questionsRouter = require('./routes/questions');
-const auth = require('./routes/auth');
-require('./helpers/passport');
+const indexRouter = require('./app/routes/index');
+const usersRouter = require('./app/routes/users');
+const apisRouter = require('./app/routes/apis');
+const questionsRouter = require('./app/routes/questions');
+const auth = require('./app/routes/auth');
+require('./app/utils/passport');
 
 
 // middleware
-const middleware = require('./helpers/middlewares');
+const middleware = require('./app/utils/middlewares');
 
 
 // view engine setup
@@ -62,7 +64,7 @@ app.use('/user', passport.authenticate('jwt', {session: false}), usersRouter);
 app.use('/auth', auth);
 app.use('/users', usersRouter);
 app.use('/api', apisRouter);
-app.use('/questions', questionsRouter);
+app.use('/questions', passport.authenticate('jwt', {session: false}), questionsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

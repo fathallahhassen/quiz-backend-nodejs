@@ -4,8 +4,7 @@ exports.errorHandler = (err, req, res) => {
 	res.locals.error = req.app.get('env') === 'development' ? err : {};
 
 	// render the error page
-	res.status(err.status || 500);
-	res.render('error');
+	res.status(err.status || 500).send('Unable to find the requested resource!');
 };
 
 exports.allowCrossDomain = (req, res, next) => {

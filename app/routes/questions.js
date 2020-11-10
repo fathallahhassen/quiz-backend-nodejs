@@ -1,5 +1,5 @@
 const express = require('express');
-const helpers = require('../helpers/questions');
+const helpers = require('../controllers/questions');
 const router = express.Router();
 
 // this one is just a test

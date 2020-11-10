@@ -1,9 +1,11 @@
 {
   "name": "quiz",
   "version": "0.0.0",
+  "main": "app.js",
+  "description": "This example is so cool.",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -27,5 +29,9 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
+  },
+  "engines": {
+    "node": "v12.14.1",
+    "npm": "6.13.4"
   }
 }

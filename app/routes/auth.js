@@ -4,10 +4,10 @@ const validator = require('validator');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 
-const User = require('../models/User');
+const User = require('../models/user');
 
 
-const usersHelpers = require('../helpers/users');
+const usersHelpers = require('../controllers/users');
 
 /* POST login. */
 router.post('/login', function (req, res, next) {

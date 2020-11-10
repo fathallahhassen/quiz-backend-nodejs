@@ -20,11 +20,13 @@ exports.getQuestion = (req, res) => {
 
 // create one question question
 exports.createQuestion = (req, res) => {
-	const {description} = req.body;
-	const {choices} = req.body;
+	const {question} = req.body;
+	const {options} = req.body;
+	const {answer} = req.body;
 	db.Question.create({
-		description,
-		choices
+		question,
+		options,
+		answer
 	}).then((createdQuestion) => {
 		res.status(201).json(createdQuestion)
 	}).catch(error => {
