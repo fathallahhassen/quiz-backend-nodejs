@@ -40,7 +40,7 @@ router.post('/register', function (req, res, next) {
 	const validationErrors = [];
 	if (!validator.isEmail(req.body.email)) validationErrors.push({message: 'Please enter a valid email address.'});
 	if (!validator.isLength(req.body.password, {min: 8})) validationErrors.push({message: 'Password must be at least 8 characters long'});
-	if (req.body.password !== req.body.confirmPassword) validationErrors.push({message: 'Passwords do not match'});
+	if (req.body.password !== req.body.passwordConfirmation) validationErrors.push({message: 'Passwords do not match'});
 
 	if (validationErrors.length) {
 		return res.status(400).json({
@@ -50,6 +50,7 @@ router.post('/register', function (req, res, next) {
 	req.body.email = validator.normalizeEmail(req.body.email, {gmail_remove_dots: false});
 
 	const user = {
+		userName: req.body.userName,
 		email: req.body.email,
 		password: req.body.password
 	};

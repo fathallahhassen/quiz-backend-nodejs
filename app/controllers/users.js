@@ -13,8 +13,9 @@ exports.findUserByQuery = (query) => {
 
 // create one user user
 exports.createUser = (user) => {
-	const {email, password} = user;
+	const {userName, email, password} = user;
 	return db.User.create({
+		userName,
 		email,
 		password
 	})

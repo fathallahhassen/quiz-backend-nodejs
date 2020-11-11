@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
-
-const databaseUrl = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.i3ozc.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
+let databaseUrl = 'mongodb://localhost/quiz-api';
+console.log("process.env.NODE_ENV", process.env.NODE_ENV)
+if (process.env.NODE_ENV === 'prod') {
+	databaseUrl = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.i3ozc.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
+}
 mongoose.set('debug', true);
 mongoose.connect(databaseUrl, {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
@@ -10,6 +13,6 @@ db.once('open', () => console.log('database connected'))
 
 // to make mongoose api promise friendly
 mongoose.Promise = Promise;
-module.exports.mongoose = mongoose
+module.exports.Db = db;
 module.exports.Question = require('./question');
 module.exports.User = require('./user');

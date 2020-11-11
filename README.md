@@ -14,6 +14,10 @@ cd myproject
 # Install NPM dependencies
 npm install
 
+# Pre populate the database with questions
+npm run prepopulate-db
+
+
 # Then simply start your app
 node ./bin/www
 ```

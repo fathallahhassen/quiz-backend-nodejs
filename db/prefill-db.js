@@ -2,37 +2,55 @@ const dotEnv = require('dotenv');
 // ENV variables
 dotEnv.config();
 
-const db = require('../app/models');
+const QuizDb = require('../app/models');
 
+QuizDb.Db.dropCollection("questions", function (
+		err,
+		result
+) {
+	console.log("Collection droped");
+});
 const questionsData = [
 	{
-		question: "whats up",
-		options: ['ok', 'not ok', 'top'],
-		answer: 'done'
+		question: "What color is the sky ?",
+		options: ['Blue', 'Red', 'Pink', 'Green'],
+		answer: 'Blue'
 	}, {
-		question: "whats up",
-		options: ['ok', 'not ok', 'top'],
-		answer: 'done'
+		question: "What color is the grass ?",
+		options: ["Black", "Green", "Yellow", "Purple"],
+		answer: 'Green'
 	}, {
-		question: "whats up",
-		options: ['ok', 'not ok', 'top'],
-		answer: 'done'
+		question: "What color is the sea ?",
+		options: ['Purple', 'Blue', 'Red', 'Pink'],
+		answer: 'Blue'
 	}, {
-		question: "whats up",
-		options: ['ok', 'not ok', 'top'],
-		answer: 'done'
+		question: "What color is the dirt ?",
+		options: ['Brown', 'Pink', 'Purple', 'Blue', 'Red'],
+		answer: 'Brown'
 	}, {
-		question: "whats up",
-		options: ['ok', 'not ok', 'top'],
-		answer: 'done'
+		question: "What color is the sun ?",
+		options: ["Yellow", "Turqouise", "Orange", "Brown"],
+		answer: 'Yellow'
 	}, {
-		question: "whats up",
-		options: ['ok', 'not ok', 'top'],
-		answer: 'done'
+		question: "What color is the moon ?",
+		options: ["Brown", "white", "Turqouise", "Orange"],
+		answer: 'white'
 	}, {
-		question: "whats up",
-		options: ['ok', 'not ok', 'top'],
-		answer: 'done'
+		question: "What color is the brain ?",
+		options: ["Grey", "Brown", "white", "Turqouise"],
+		answer: 'Grey'
+	}, {
+		question: "What color is the volcano ?",
+		options: ["Brown", "Lava", "white", "Turqouise"],
+		answer: 'Lava'
+	}, {
+		question: "What color is the inner core ?",
+		options: ["Brown", "Lava", "Yellow", "Turqouise"],
+		answer: 'Yellow'
+	}, {
+		question: "What color is the liver ?",
+		options: ["Yellow", "Brown", "Lava", "white"],
+		answer: 'Brown'
 	},
 ];
 
@@ -41,16 +59,15 @@ var itemsProcessed = 0;
 
 
 questionsData.forEach((item, index, array) => {
-	db.Question.create({
+	QuizDb.Question.create({
 		question: item.question,
 		options: item.options,
 		answer: item.answer
 	}).then(a => {
-		db.Question.findById(a, function (err, doc) {
-			console.log('populated name "%s"', doc);
+		QuizDb.Question.findById(a, function (err, doc) {
 			itemsProcessed++;
 			if (itemsProcessed === array.length) {
-				console.log(" items Processed with value " + array.length);
+				console.log('%s items processed of %s items in total', itemsProcessed, array.length);
 				process.exit()
 			}
 		});
