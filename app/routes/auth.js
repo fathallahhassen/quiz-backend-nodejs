@@ -7,13 +7,12 @@ const passport = require('passport');
 const User = require('../models/user');
 
 
-const usersHelpers = require('../controllers/users');
+const usersHelpers = require('../helpers/users');
 
 /* POST login. */
 router.post('/login', function (req, res, next) {
 
 	passport.authenticate('local', {session: false}, (err, user, info) => {
-		console.log(err);
 		if (err || !user) {
 			return res.status(400).json({
 				message: info ? info.message : 'Login failed',
@@ -26,7 +25,7 @@ router.post('/login', function (req, res, next) {
 				res.send(err);
 			}
 
-			const token = jwt.sign(user.toJSON(), process.env.JWT_KEY, { expiresIn: '1h' });
+			const token = jwt.sign(user.toJSON(), process.env.JWT_KEY, {expiresIn: '1h'});
 
 			return res.json({user, token});
 		});

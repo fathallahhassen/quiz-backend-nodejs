@@ -4,7 +4,17 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
 	userName: String,
 	email: {type: String, unique: true},
-	password: String
+	password: String,
+	quizzes: [
+		{
+			quiz: {
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "Quiz"
+			},
+			answers: [],
+			result: Number
+		}
+	],
 }, {timestamps: true});
 
 /**

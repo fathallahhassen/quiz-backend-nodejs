@@ -14,7 +14,6 @@ app.use(passport.initialize());
 // ENV variables
 dotEnv.config();
 
-console.log("process.env", process.env.JWT_KEY);
 // session config
 const sessionOptions = {
 	name: 'session',
@@ -34,6 +33,7 @@ const indexRouter = require('./app/routes/index');
 const usersRouter = require('./app/routes/users');
 const apisRouter = require('./app/routes/apis');
 const questionsRouter = require('./app/routes/questions');
+const quizzesRouter = require('./app/routes/quizzes');
 const auth = require('./app/routes/auth');
 require('./app/utils/passport');
 
@@ -65,6 +65,7 @@ app.use('/auth', auth);
 app.use('/users', usersRouter);
 app.use('/api', apisRouter);
 app.use('/questions', passport.authenticate('jwt', {session: false}), questionsRouter);
+app.use('/quizzes', quizzesRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

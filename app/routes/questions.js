@@ -1,5 +1,5 @@
 const express = require('express');
-const helpers = require('../controllers/questions');
+const helpers = require('../helpers/questions');
 const router = express.Router();
 
 router.route('/')

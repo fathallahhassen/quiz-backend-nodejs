@@ -30,7 +30,7 @@ exports.createQuestion = (req, res) => {
 	}).then((createdQuestion) => {
 		res.status(201).json(createdQuestion)
 	}).catch(error => {
-		res.status(500).json({"error": err})
+		res.status(500).json({"error": error})
 	});
 };
 
@@ -43,6 +43,7 @@ exports.updateQuestion = (req, res) => {
 		res.status(500).json({"error": error})
 	})
 };
+
 
 // delete one question question
 exports.deleteQuestion = (req, res) => {
